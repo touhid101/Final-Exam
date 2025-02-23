@@ -4,6 +4,12 @@ FROM node:18 AS build
 # Step 2: Set the working directory
 WORKDIR /app
 
+#Clean and reinstall dependencies
+rm -rf node_modules package-lock.json
+npm cache clean --force
+npm install
+npm run build
+
 # Step 3: Copy only package.json and package-lock.json (this helps in caching dependencies)
 COPY package*.json ./
 
